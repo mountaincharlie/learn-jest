@@ -3,7 +3,7 @@
  */
 
 // getting the file we're testing 
-const {game, newGame, showScore} = require("../game");
+const {game, newGame, showScore, addTurn} = require("../game");
 
 // bringing in the mock DOM
 beforeAll(() => {
@@ -46,8 +46,8 @@ describe("newGame works correctly", () => {
     test("should reset game score to 0", () => {
         expect(game.score).toEqual(0);
     });
-    test("should clear currentGame array", () => {
-        expect(game.currentGame.length).toEqual(0);
+    test("should be one move in PCs game array", () => {
+        expect(game.currentGame.length).toEqual(1);
     });
     test("should clear playerMoves array", () => {
         expect(game.playerMoves.length).toEqual(0);
@@ -56,3 +56,5 @@ describe("newGame works correctly", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
     });
 });
+
+// tests for the lights on 

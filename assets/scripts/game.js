@@ -11,7 +11,15 @@ function newGame(){
     game.score = 0;
     game.currentGame = [];
     game.playerMoves = [];
-    showScore()
+    showScore();
+    addTurn();
+};
+
+function addTurn(){
+    game.playerMoves = [];
+    // pushing a random choice from the choices array
+    game.currentGame.push(game.choices[Math.floor(Math.random()*4)]);
+    // showTurns()
 };
 
 // shows the score to the user
@@ -21,4 +29,4 @@ function showScore(){
 
 
 // exporting game functions for testing
-module.exports = {game, newGame, showScore};  // using {} since we're exporting more than 1 object
+module.exports = {game, newGame, showScore, addTurn};  // using {} since we're exporting more than 1 object
