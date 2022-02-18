@@ -3,7 +3,7 @@
  */
 
 // getting the file we're testing 
-const {game, newGame, showScore, addTurn} = require("../game");
+const {game, newGame, showScore, addTurn, lightsOn} = require("../game");
 
 // bringing in the mock DOM
 beforeAll(() => {
@@ -57,4 +57,31 @@ describe("newGame works correctly", () => {
     });
 });
 
-// tests for the lights on 
+// tests for the lights on functionality
+// using before/afterEach allows tests to be 'isolated'
+describe("gameplay works correctly", () => {
+    // before each TEST
+    beforeEach(() => {
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+        addTurn();
+    });
+    // after each TEST
+    afterEach(() => {
+        game.score = 0;
+        game.currentGame = [];
+        game.playerMoves = [];
+    });
+    test("addTurn adds a new turn to the game", () => {
+        addTurn();
+        expect(game.currentGame.length).toEqual(2);
+    });
+    test("should add correct class to light up button", () => {
+        // always at least one random button id in currentGame
+        let button = document.getElementById(game.currentGame[0]);
+        lightsOn(game.currentGame[0]);
+        // checking the button's class list includes the light class
+        expect(button.classList).toContain("light");
+    });
+});

@@ -27,6 +27,14 @@ function showScore(){
     document.getElementById("score").innerText = game.score;
 };
 
+// temporarily adds the light class to the triggered circle
+function lightsOn(circleId){
+    document.getElementById(circleId).classList.add("light");
+    setTimeout(() => {
+        document.getElementById(circleId).classList.remove("light");
+    }, 400);
+};
+
 
 // exporting game functions for testing
-module.exports = {game, newGame, showScore, addTurn};  // using {} since we're exporting more than 1 object
+module.exports = {game, newGame, showScore, addTurn, lightsOn};  // using {} since we're exporting more than 1 object
