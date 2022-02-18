@@ -58,6 +58,12 @@ describe("newGame works correctly", () => {
     test("should display 0 for element with id = score", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
     });
+    test("data-listener should be true", () => {
+        const circleElements = document.getElementsByClassName("circle");
+        for (let element of circleElements){
+            expect(element.getAttribute("data-listener")).toEqual("true");
+        };
+    });
 });
 
 // tests for the lights on functionality
