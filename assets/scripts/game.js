@@ -60,7 +60,25 @@ function showScore(){
     document.getElementById("score").innerText = game.score;
 };
 
+// reacting to correct/incorrect user guesses
+function playerTurn(){
+    // getting final index
+    let ind = game.playerMoves.length - 1;
+    // comparing to currentGame to check if correct
+    if (game.currentGame[ind] === game.playerMoves[ind]){
+        // checking if theyre at the end of the sequence
+        if (game.currentGame.length === game.playerMoves.length){
+            game.score++;  // increases score
+            showScore();  // shows score
+            addTurn();  // creates next turn
+        };
+    } else {
+        alert("Wrong move!");
+        newGame();  // restarting the game
+    };
+};
+
 
 // exporting game functions for testing
-module.exports = {game, newGame, showScore, addTurn, lightsOn, showTurns};  
+module.exports = {game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn};  
 // using {} since we're exporting more than 1 object

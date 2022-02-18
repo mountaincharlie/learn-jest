@@ -3,7 +3,10 @@
  */
 
 // getting the file we're testing 
-const {game, newGame, showScore, addTurn, lightsOn, showTurns} = require("../game");
+const {game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn} = require("../game");
+
+// adding a 'spy' to wait for an alert to be displayed
+jest.spyOn(window, "alert").mockImplementation(() => {});
 
 // bringing in the mock DOM
 beforeAll(() => {
@@ -97,5 +100,15 @@ describe("gameplay works correctly", () => {
         game.turnNumber = 42;
         showTurns()
         expect(game.turnNumber).toEqual(0);
+    });
+    test("should increment score if turn is correct", () => {
+        game.playerMoves.push(game.currentGame[0]);
+        playerTurn();
+        expect(game.score).toEqual(1);
+    });
+    test("should call an alert if the guess is wrong", () => {
+        game.playerMoves.push("wrong");
+        playerTurn();
+        expect(window.alert).toBeCalledWith("Wrong move!");
     });
 });
