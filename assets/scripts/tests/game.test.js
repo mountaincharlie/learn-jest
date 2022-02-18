@@ -3,7 +3,7 @@
  */
 
 // getting the file we're testing 
-const {game, newGame, showScore, addTurn, lightsOn} = require("../game");
+const {game, newGame, showScore, addTurn, lightsOn, showTurns} = require("../game");
 
 // bringing in the mock DOM
 beforeAll(() => {
@@ -30,6 +30,9 @@ describe("game object contains correct keys", () => {
     });
     test("choices contains correct ids", () => {
         expect(game.choices).toEqual(["button1", "button2", "button3", "button4"]);
+    });
+    test("turnNumber key exists", () => {
+        expect("turnNumber" in game).toEqual(true);
     });
 });
 
@@ -83,5 +86,10 @@ describe("gameplay works correctly", () => {
         lightsOn(game.currentGame[0]);
         // checking the button's class list includes the light class
         expect(button.classList).toContain("light");
+    });
+    test("showTurns should update game.turnNumber", () => {
+        game.turnNumber = 42;
+        showTurns()
+        expect(game.turnNumber).toEqual(0);
     });
 });
